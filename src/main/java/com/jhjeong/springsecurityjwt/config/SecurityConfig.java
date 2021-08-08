@@ -1,5 +1,6 @@
 package com.jhjeong.springsecurityjwt.config;
 
+import com.jhjeong.springsecurityjwt.config.jwt.JwtAuthenticationFilter;
 import com.jhjeong.springsecurityjwt.model.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .addFilter(corsFilter) // @CrossOrigin: 인증이 없을 때, 인증이 있을 때는 필터에 등록
-        .formLogin().disable()
+        .formLogin().disable() // 기본 로그인 경로 비활성화
         .httpBasic().disable()
+        .addFilter(new JwtAuthenticationFilter(authenticationManager()))
         .authorizeRequests()
         .antMatchers("/api/v1/user/**")
         .hasAnyRole(Role.USER.name(), Role.MANAGER.name(), Role.ADMIN.name())

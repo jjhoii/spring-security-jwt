@@ -6,11 +6,11 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class principalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails {
 
   private User user;
 
-  public principalDetails(User user) {
+  public PrincipalDetails(User user) {
     this.user = user;
   }
 
@@ -18,6 +18,7 @@ public class principalDetails implements UserDetails {
   public Collection<? extends GrantedAuthority> getAuthorities() {
     Collection<GrantedAuthority> authorities = new ArrayList<>();
     user.getRoleList().forEach(r -> authorities.add(() -> r));
+
     return authorities;
   }
 
