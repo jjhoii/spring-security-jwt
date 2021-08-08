@@ -3,9 +3,11 @@ package com.jhjeong.springsecurityjwt.config.auth;
 import com.jhjeong.springsecurityjwt.model.User;
 import java.util.ArrayList;
 import java.util.Collection;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Data
 public class PrincipalDetails implements UserDetails {
 
   private User user;
@@ -23,9 +25,7 @@ public class PrincipalDetails implements UserDetails {
   }
 
   @Override
-  public String getPassword() {
-    return user.getPassword();
-  }
+  public String getPassword() { return user.getPassword(); }
 
   @Override
   public String getUsername() {
